@@ -2,17 +2,23 @@
 
 echo "Welcome to the Employee Wage Computation "
 
-isPresent=1;
-randomCheck=$((RANDOM%2));
+#! /bin/bash -x
+isPartTime=1;
+isFullTime=2;
+empRatePerHr=20;
+empCheck=$(($RANDOM%3));
+case $empCheck in
 
-if [ $isPresent -eq $randomCheck ]
-then
+   $isFullTime )
+                                                empHrs=12
+                                                        ;;
+        $isPartTime )
 
-empRatePerHr=20
-empHr=8
-salary=$(($empHr * $empRatePerHr));
-else
-salary=0;
-fi
+                                                empHrs=8
+                                                        ;;
+                * )
+                                                empHrs=0
 
+                                                        ;;
+esac
 
