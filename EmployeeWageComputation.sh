@@ -2,7 +2,7 @@
 
 echo "Welcome to the Employee Wage Computation "
 
-#! /bin/bash -x
+
 isPartTime=1;
 isFullTime=2;
 empRatePerHr=20;
