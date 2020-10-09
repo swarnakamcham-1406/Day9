@@ -2,46 +2,49 @@
 
 echo "Welcome to the Employee Wage Computation "
 
-isPartTime=1;
-isFullTime=2;
-empRatePerHr=20;
-MAX_HRS_IN_MONTH=100;
-numWorkingDays=20;
+IS_PART_TIME=1
+IS_FULL_TIME=2
+EMP_RATE_PER_HR=20
+MAX_HRS_IN_MONTH=50
+NUM_WORKING_DAYS=20
+
+declare -A dailyWages
 
 totalEmpHr=0
 totalWorkingDays=0
-function getWorkHrs() {
-local $empCheck=$1
 
-case $empCheck in
+function getworkinghour(){
 
-   $isFullTime )
-                  empHrs=12
-                     ;;
-   $isPartTime )
+local empHrs=0;
 
-                  empHrs=8
-                     ;;
-      * )
-                  empHrs=0
-
-                     ;;
-esac
-
-        echo $empHrs
+         case $1 in
+            $IS_FULL_TIME )
+                              empHrs=8
+                ;;
+            $IS_PART_TIME )
+                              empHrs=4
+                ;;
+            * )
+                           empHrs=0
+                ;;
+         esac
+echo $empHrs
 
 }
 
-while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $numWorkingDays ]]
+
+while [[ $totalEmpHr -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
+      ((totalWorkingDays++))
+      employeeCheck=$((RANDOM%3))
 
-        ((totalWorkingDays++))
-empCheck=$((RANDOM%3));
-empHrs="$( getWorkHrs $empCheck )"
-totalEmpHrs=$(($totalEmpHrs+$empHrs))
+      empHrs=$( getworkinghour $employeeCheck )
 
+      totalEmpHR=$((totalEmpHR+empHrs))
+      dailywages["Day_$totalWorkingDays"]=$(( $empHrs*$EMP_RATE_PER_HR ));
 done
-totalSalary=$(($totalEmpHrs+$empRatePerHr));
-
-
+salary=$(($EMP_RATE_PER_HR*$totalEmpHR))
+echo "the salary is $salary";
+echo ${!dailywages[@]};
+echo ${dailywages[@]};
 
