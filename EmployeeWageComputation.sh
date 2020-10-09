@@ -4,12 +4,17 @@ echo "Welcome to the Employee Wage Computation "
 
 isPartTime=1;
 isFullTime=2;
-totalSalary=0;
 empRatePerHr=20;
+MAX_HRS_IN_MONTH=100;
 numWorkingDays=20;
 
-for(( day=1; day<=numWorkingDays; day++ ))
+totalEmpHr=0
+totalWorkingDays=0
+
+while [[ $totalEmpHr -lt $MAX_HRS_IN_MONTH && $totalWorkingDays -lt $numWorkingDays ]]
 do
+
+        ((totalWorkingDays++))
 
    empCheck=$((RANDOM%3));
 case $empCheck in
@@ -27,8 +32,8 @@ case $empCheck in
                      ;;
 esac
 
-salary=$(($empHrs * $empRatePerHr));
-
-totalSalary=$(($totalSalary+$salary));
+        totalEmpHr=$((totalEmpHr+empHrs))
 done
 
+salary=$((empRatePerHr*totalEmpHr))
+echo "the salary is $salary"
