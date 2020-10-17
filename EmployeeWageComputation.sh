@@ -22,3 +22,5 @@ case $empCheck in
                                                         ;;
 esac
 
+salary= $empRatePerHr * $empcheck
+echo "the salary is $salary"
